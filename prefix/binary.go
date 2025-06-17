@@ -1,6 +1,7 @@
 package prefix
 
 import (
+	"encoding/hex"
 	"fmt"
 	"strconv"
 	"strings"
@@ -70,7 +71,19 @@ func (p *binaryVarPrefixer) DecodeLength(maxLen int, data []byte) (int, error) {
 		return 0, err
 	}
 
-	dataLen := int(bDigits[0])
+	// Just when the field length is LLLL
+	var dataLen int
+
+	if p.Digits == 4 {
+		parsedInt, err := strconv.ParseInt(hex.EncodeToString(bDigits), 16, 64)
+		if err != nil {
+			return 0, err
+		}
+
+		dataLen = int(parsedInt)
+	} else {
+		dataLen = int(bDigits[0])
+	}
 
 	if dataLen > maxLen {
 		return 0, fmt.Errorf("data length %d is larger than maximum %d", dataLen, maxLen)
@@ -80,6 +93,10 @@ func (p *binaryVarPrefixer) DecodeLength(maxLen int, data []byte) (int, error) {
 }
 
 func (p *binaryVarPrefixer) Length() int {
+	// Just when the field length is LLLL
+	if p.Digits == 4 {
+		return 2
+	}
 	return 1
 }
 
