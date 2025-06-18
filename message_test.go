@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/franizus/iso8583/encoding"
-	"github.com/franizus/iso8583/field"
-	"github.com/franizus/iso8583/padding"
-	"github.com/franizus/iso8583/prefix"
+	"github.com/cimartinez3/iso8583/encoding"
+	"github.com/cimartinez3/iso8583/field"
+	"github.com/cimartinez3/iso8583/padding"
+	"github.com/cimartinez3/iso8583/prefix"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

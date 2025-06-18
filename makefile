@@ -27,7 +27,7 @@ docker-fuzz:
 
 build:
 	@mkdir -p ./bin/
-	go build -ldflags "-X github.com/franizus/iso8583.Version=${VERSION}" -o bin/iso8583 github.com/franizus/iso8583/cmd/iso8583
+	go build -ldflags "-X github.com/cimartinez3/iso8583.Version=${VERSION}" -o bin/iso8583 github.com/cimartinez3/iso8583/cmd/iso8583
 
 release-push:
 	docker push moov/iso8583fuzz:$(VERSION)

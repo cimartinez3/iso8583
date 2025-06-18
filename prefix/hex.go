@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/franizus/iso8583/encoding"
+	"github.com/cimartinez3/iso8583/encoding"
 )
 
 var Hex = Prefixers{

@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/franizus/iso8583"
-	"github.com/franizus/iso8583/cmd/iso8583/describe"
-	"github.com/franizus/iso8583/specs"
+	"github.com/cimartinez3/iso8583"
+	"github.com/cimartinez3/iso8583/cmd/iso8583/describe"
+	"github.com/cimartinez3/iso8583/specs"
 )
 
 var availableSpecs = map[string]*iso8583.MessageSpec{

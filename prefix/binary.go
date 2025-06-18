@@ -1,12 +1,13 @@
 package prefix
 
 import (
+	"encoding/binary"
 	"encoding/hex"
 	"fmt"
 	"strconv"
 	"strings"
 
-	"github.com/franizus/iso8583/encoding"
+	"github.com/cimartinez3/iso8583/encoding"
 )
 
 type binaryVarPrefixer struct {
@@ -51,6 +52,17 @@ func (p *binaryVarPrefixer) EncodeLength(maxLen, dataLen int) ([]byte, error) {
 
 	if len(strconv.Itoa(dataLen)) > p.Digits {
 		return nil, fmt.Errorf("number of digits in length: %d exceeds: %d", dataLen, p.Digits)
+	}
+
+	if p.Digits == 4 {
+		byteSlice := make([]byte, 2)
+
+		// BigEndian gets more significant bit first.
+		binary.BigEndian.PutUint16(byteSlice, uint16(dataLen))
+
+		completedLen := fmt.Sprintf("%04s", hex.EncodeToString(byteSlice))
+
+		return hex.DecodeString(completedLen)
 	}
 
 	res, err := encoding.Binary.Encode([]byte{byte(dataLen)})

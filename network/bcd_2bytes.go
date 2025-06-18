@@ -5,7 +5,7 @@ import (
 	"io"
 	"strconv"
 
-	"github.com/franizus/iso8583/encoding"
+	"github.com/cimartinez3/iso8583/encoding"
 )
 
 var _ Header = (*BCD2BytesHeader)(nil)
